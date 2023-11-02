@@ -9,7 +9,9 @@ from alembic import context
 # access to the values within the .ini file in use.
 from src.config import settings
 from src.database import Base
-from src.hotels.models import Hotels
+from src.hotels.models import Hotels, Rooms
+from src.bookings.models import Bookings
+from src.users.models import Users
 
 config = context.config
 config.set_main_option('sqlalchemy.url', f'{settings.DATABASE_URL}?async_fallback=True')

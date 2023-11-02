@@ -46,6 +46,6 @@ class SBooking(BaseModel):
     date_to: date
 
 
-@app.post(path='/booking')
+@app.post(path='bookings')
 def add_bookings(booking: SBooking):
     pass
