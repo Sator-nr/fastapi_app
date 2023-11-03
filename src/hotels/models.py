@@ -13,6 +13,9 @@ class Hotels(Base):
     rooms_quantity = Column(Integer, nullable=False)
     image_id = Column(Integer)
 
+    class Config:
+        orm_mode = True
+
 
 class Rooms(Base):
     __tablename__ = 'rooms'
@@ -25,3 +28,6 @@ class Rooms(Base):
     services = Column(JSON)
     quantity = Column(Integer, nullable=False)
     image_id = Column(Integer)
+
+    class Config:
+        orm_mode = True

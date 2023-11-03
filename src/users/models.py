@@ -9,3 +9,6 @@ class Users(Base):
     id = Column(Integer, primary_key=True)
     email = Column(String)
     hashed_password = Column(String)
+
+    class Config:
+        orm_mode = True
