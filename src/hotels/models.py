@@ -1,4 +1,7 @@
-from sqlalchemy import Column, Integer, String, JSON
+from typing import Optional
+
+from sqlalchemy import JSON
+from sqlalchemy.orm import Mapped, mapped_column
 
 from src.database import Base
 
@@ -6,12 +9,12 @@ from src.database import Base
 class Hotels(Base):
     __tablename__ = 'hotels'
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
-    location = Column(String, nullable=False)
-    services = Column(JSON)
-    rooms_quantity = Column(Integer, nullable=False)
-    image_id = Column(Integer)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(nullable=False)
+    location: Mapped[str] = mapped_column(nullable=False)
+    services: Mapped[Optional[list[str]]] = mapped_column(JSON)
+    rooms_quantity: Mapped[int] = mapped_column(nullable=False)
+    image_id: Mapped[int] = mapped_column()
 
     class Config:
         orm_mode = True
@@ -20,14 +23,14 @@ class Hotels(Base):
 class Rooms(Base):
     __tablename__ = 'rooms'
 
-    id = Column(Integer, primary_key=True)
-    hotel_id = Column(Integer, nullable=False)
-    name = Column(String, nullable=False)
-    description = Column(String)
-    price = Column(Integer, nullable=False)
-    services = Column(JSON)
-    quantity = Column(Integer, nullable=False)
-    image_id = Column(Integer)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    hotel_id: Mapped[int] = mapped_column(nullable=False)
+    name: Mapped[str] = mapped_column(Snullable=False)
+    description: Mapped[str] = mapped_column()
+    price: Mapped[int] = mapped_column(nullable=False)
+    services: Mapped[Optional[list[str]]] = mapped_column(JSON)
+    quantity: Mapped[int] = mapped_column(nullable=False)
+    image_id: Mapped[int] = mapped_column()
 
     class Config:
         orm_mode = True

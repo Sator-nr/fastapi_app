@@ -8,6 +8,8 @@ class Settings(BaseSettings):
     DB_NAME: str
     DB_USER: str
     DB_PASS: str
+    SECRET: str
+    HASH: str
 
     @property
     def DATABASE_URL(self):

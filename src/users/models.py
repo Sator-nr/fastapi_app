@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import Mapped, mapped_column
 
 from src.database import Base
 
@@ -6,9 +6,9 @@ from src.database import Base
 class Users(Base):
     __tablename__ = 'users'
 
-    id = Column(Integer, primary_key=True)
-    email = Column(String)
-    hashed_password = Column(String)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    email: Mapped[str] = mapped_column()
+    hashed_password: Mapped[str] = mapped_column()
 
     class Config:
         orm_mode = True
