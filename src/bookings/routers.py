@@ -1,11 +1,11 @@
+from datetime import date
+
 from fastapi import APIRouter, Depends
-from sqlalchemy import select
-from starlette.requests import Request
 
 from src.bookings.dao import BookingDAO
-from src.bookings.models import Bookings
 from src.bookings.schemas import SBooking
-from src.database import async_session_maker
+from src.exceptions import RoomCanNotBeBooked
+from src.hotels.rooms.dao import RoomsDAO
 from src.users.models import Users
 from src.users.dependencies import get_current_user
 
@@ -17,7 +17,29 @@ router = APIRouter(
 
 @router.get("")
 async def get_bookings(user: Users = Depends(get_current_user)) -> list[SBooking]:
-    return await BookingDAO.find_all(user_id=user.id)
+    bookings = await BookingDAO.find_all(user_id=user.id)
+    for booking in bookings:
+        room = await RoomsDAO.find_by_id(booking.room_id)
+        booking.image_id = room.image_id
+        booking.name = room.name
+        booking.description = room.description
+        booking.services = room.services
+    return bookings
+
+
+@router.post("")
+async def add_booking(room_id: int,
+                      date_from: date,
+                      date_to: date,
+                      user: Users = Depends(get_current_user)):
+    booking = await BookingDAO.add(user.id, room_id, date_from, date_to)
+    if not booking:
+        raise RoomCanNotBeBooked
+
+
+@router.post("/{booking_id}")
+async def delete_booking(booking_id: int, user: Users = Depends(get_current_user)):
+    return await BookingDAO.delete(user.id, booking_id)
 
 
 

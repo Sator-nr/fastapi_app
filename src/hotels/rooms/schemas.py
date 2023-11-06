@@ -1,23 +1,20 @@
 from datetime import date
 from typing import Optional
-
 from pydantic import BaseModel
+from sqlalchemy import Computed
 
 
-class SBooking(BaseModel):
+class FindRoomResponse(BaseModel):
     id: int
-    room_id: int
-    user_id: int
-    date_from: date
-    date_to: date
-    price: int
-    total_cost: int
-    total_days: int
-
-    image_id: int
+    hotel_id: int
     name: str
     description: str
+    price: int
     services: Optional[list[str]]
+    quantity: int
+    image_id: int
+    unoccupied: int
+    total_cost: int
 
     class Config:
         # orm_mode = True

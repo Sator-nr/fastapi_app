@@ -1,35 +1,49 @@
 from fastapi import status, HTTPException
 
 
-class UserAlreadyExistsException(HTTPException):
-    status_code = status.HTTP_409_CONFLICT,
-    detail = 'Пользователь уже зарегистрирован'
+UserAlreadyExistsException = HTTPException(
+    status_code=status.HTTP_409_CONFLICT,
+    detail='Пользователь уже зарегистрирован'
+)
 
 
-class IncorrectEmailOrPasswordException(HTTPException):
-    status_code = status.HTTP_401_UNAUTHORIZED,
-    detail = 'Неверная почта или пароль'
+IncorrectEmailOrPasswordException = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED,
+    detail='Неверная почта или пароль'
+)
 
 
-class TokenExpiredException(HTTPException):
-    status_code = status.HTTP_401_UNAUTHORIZED,
-    detail = 'Токен истек'
+TokenExpiredException = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED,
+    detail='Токен истек'
+)
 
 
-class TokenAbsentException(HTTPException):
-    status_code = status.HTTP_401_UNAUTHORIZED,
-    detail = 'Токен отсутствует'
+TokenAbsentException = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED,
+    detail='Токен отсутствует'
+)
 
 
-class IncorrectTokenFormatException(HTTPException):
-    status_code = status.HTTP_401_UNAUTHORIZED,
-    detail = 'Некорректный формат токена'
+IncorrectTokenFormatException = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED,
+    detail='Некорректный формат токена'
+)
 
 
-class UserIsNotPresentException(HTTPException):
-    status_code = status.HTTP_401_UNAUTHORIZED,
+UserIsNotPresentException = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED
+)
 
+RoomCanNotBeBooked = HTTPException(
+    status_code=status.HTTP_409_CONFLICT,
+    detail='Не осталось свободных номеров'
+)
 
+NoBookingException = HTTPException(
+    status_code=status.HTTP_409_CONFLICT,
+    detail='Не существует указанной брони для данного пользователя'
+)
 
 
 

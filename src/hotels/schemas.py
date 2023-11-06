@@ -1,23 +1,17 @@
 from datetime import date
 from typing import Optional
-
+from fastapi import Query
 from pydantic import BaseModel
 
 
-class SBooking(BaseModel):
+class FindHotelResponse(BaseModel):
     id: int
-    room_id: int
-    user_id: int
-    date_from: date
-    date_to: date
-    price: int
-    total_cost: int
-    total_days: int
-
-    image_id: int
     name: str
-    description: str
+    location: str
     services: Optional[list[str]]
+    rooms_quantity: int
+    image_id: int
+    unoccupied_rooms: int
 
     class Config:
         # orm_mode = True
