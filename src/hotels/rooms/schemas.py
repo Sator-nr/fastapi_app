@@ -4,7 +4,7 @@ from pydantic import BaseModel
 from sqlalchemy import Computed
 
 
-class FindRoomResponse(BaseModel):
+class SRoomResponse(BaseModel):
     id: int
     hotel_id: int
     name: str

@@ -4,7 +4,7 @@ from fastapi import Query
 from pydantic import BaseModel
 
 
-class FindHotelResponse(BaseModel):
+class SHotelResponse(BaseModel):
     id: int
     name: str
     location: str
